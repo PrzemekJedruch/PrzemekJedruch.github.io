@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Przemek Jedruch | Data Science Portfolio</title>
+<title>Przemek Jedruch | Machine Learning Portfolio</title>
 
 <style>
 * {
@@ -12,141 +12,255 @@
     box-sizing: border-box;
 }
 
-body {
-    font-family: Arial, sans-serif;
-    background: #07111f;
-    color: white;
-    line-height: 1.6;
+html {
+    scroll-behavior: smooth;
 }
 
-#particles {
+body {
+    font-family: Arial, sans-serif;
+    background: #020812;
+    color: #ffffff;
+    line-height: 1.6;
+    overflow-x: hidden;
+}
+
+#network {
     position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
+    inset: 0;
+    z-index: -2;
+    background:
+        radial-gradient(circle at 70% 20%, rgba(0,120,255,0.25), transparent 30%),
+        radial-gradient(circle at 20% 80%, rgba(0,200,255,0.18), transparent 30%),
+        linear-gradient(135deg, #020812, #061529, #020812);
+}
+
+.overlay {
+    position: fixed;
+    inset: 0;
     z-index: -1;
-    background: radial-gradient(circle at center, #07111f 0%, #020812 100%);
+    background: rgba(2,8,18,0.55);
 }
 
 header {
-    padding: 25px 10%;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    background: rgba(8, 24, 43, 0.9);
     position: sticky;
     top: 0;
     z-index: 10;
+    padding: 22px 10%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: rgba(2,8,18,0.75);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(77,163,255,0.15);
 }
 
 header h1 {
-    font-size: 26px;
+    font-size: 24px;
 }
 
 nav a {
-    color: white;
+    color: #ffffff;
+    margin-left: 26px;
     text-decoration: none;
-    margin-left: 25px;
+    font-size: 15px;
 }
 
 nav a:hover {
-    color: #4da3ff;
+    color: #35a7ff;
 }
 
 .hero {
     min-height: 90vh;
+    padding: 0 10%;
     display: flex;
     align-items: center;
-    padding: 0 10%;
 }
 
-.hero-text {
-    max-width: 750px;
-    animation: fadeUp 1.5s ease;
+.hero-content {
+    max-width: 760px;
+    animation: fadeUp 1.2s ease;
 }
 
-.hero-text h2 {
-    font-size: 58px;
-    margin-bottom: 20px;
+.badge {
+    color: #35a7ff;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    font-size: 14px;
+    margin-bottom: 16px;
 }
 
-.hero-text p {
+.hero h2 {
+    font-size: 64px;
+    line-height: 1.05;
+    margin-bottom: 24px;
+}
+
+.hero h2 span {
+    color: #35a7ff;
+}
+
+.hero p {
     font-size: 21px;
-    color: #d0d0d0;
-    margin-bottom: 30px;
+    color: #d5dbea;
+    max-width: 720px;
+    margin-bottom: 22px;
+}
+
+.buttons {
+    margin-top: 30px;
 }
 
 .btn {
     display: inline-block;
-    padding: 14px 28px;
-    background: #1976ff;
-    color: white;
+    padding: 14px 26px;
+    margin-right: 14px;
+    border-radius: 10px;
     text-decoration: none;
-    border-radius: 8px;
-    margin-right: 15px;
+    color: white;
+    background: linear-gradient(135deg, #087bff, #35a7ff);
+    box-shadow: 0 0 25px rgba(53,167,255,0.35);
 }
 
-.btn:hover {
-    background: #0d5fe0;
+.btn.secondary {
+    background: transparent;
+    border: 1px solid rgba(255,255,255,0.35);
+    box-shadow: none;
 }
 
 section {
-    padding: 80px 10%;
+    padding: 75px 10%;
 }
 
 .section-title {
-    font-size: 38px;
     text-align: center;
-    margin-bottom: 35px;
+    font-size: 38px;
+    margin-bottom: 18px;
 }
 
-.about-text {
-    max-width: 900px;
-    margin: 0 auto 40px auto;
-    font-size: 18px;
-    color: #d0d0d0;
+.section-subtitle {
     text-align: center;
+    color: #c6cfdf;
+    max-width: 850px;
+    margin: 0 auto 45px auto;
+    font-size: 18px;
 }
 
 .cards {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-    gap: 30px;
+    grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+    gap: 26px;
 }
 
-.card, .project {
-    background: rgba(15, 31, 53, 0.9);
+.card, .project-card, .contact-card {
+    background: rgba(7, 20, 38, 0.82);
+    border: 1px solid rgba(77,163,255,0.18);
+    border-radius: 18px;
     padding: 30px;
-    border-radius: 15px;
-    box-shadow: 0 0 20px rgba(77,163,255,0.15);
+    box-shadow: 0 0 35px rgba(0,136,255,0.12);
+    transition: 0.3s ease;
 }
 
-.card h3, .project h3 {
-    color: #4da3ff;
-    margin-bottom: 15px;
+.card:hover, .project-card:hover {
+    transform: translateY(-6px);
+    border-color: rgba(77,163,255,0.45);
 }
 
-.project ul {
-    margin-left: 20px;
-    margin-bottom: 20px;
+.icon {
+    font-size: 34px;
+    margin-bottom: 14px;
+}
+
+.card h3, .project-card h3 {
+    color: #35a7ff;
+    margin-bottom: 12px;
+}
+
+.card p, .project-card p, .contact-card p {
+    color: #d5dbea;
+}
+
+.project-card {
+    max-width: 980px;
+    margin: auto;
+}
+
+.tags {
+    margin: 22px 0;
+}
+
+.tag {
+    display: inline-block;
+    padding: 7px 11px;
+    margin: 5px;
+    border-radius: 8px;
+    background: rgba(53,167,255,0.15);
+    color: #9ed2ff;
+    font-size: 14px;
+}
+
+.metrics {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+    gap: 16px;
+    margin-top: 24px;
+}
+
+.metric {
+    background: rgba(255,255,255,0.04);
+    padding: 18px;
+    border-radius: 12px;
+    text-align: center;
+}
+
+.metric strong {
+    color: #35a7ff;
+    font-size: 28px;
+}
+
+.contact-card {
+    max-width: 700px;
+    margin: auto;
+    text-align: center;
+}
+
+.contact-card a {
+    color: #35a7ff;
 }
 
 footer {
     text-align: center;
     padding: 30px;
-    background: rgba(8, 24, 43, 0.9);
-    color: #999;
+    color: #8c98aa;
+    border-top: 1px solid rgba(77,163,255,0.15);
 }
 
 @keyframes fadeUp {
     from {
         opacity: 0;
-        transform: translateY(40px);
+        transform: translateY(35px);
     }
     to {
         opacity: 1;
         transform: translateY(0);
+    }
+}
+
+@media(max-width: 800px) {
+    header {
+        flex-direction: column;
+        gap: 12px;
+    }
+
+    nav a {
+        margin: 0 8px;
+    }
+
+    .hero h2 {
+        font-size: 42px;
+    }
+
+    .hero p {
+        font-size: 18px;
     }
 }
 </style>
@@ -154,66 +268,73 @@ footer {
 
 <body>
 
-<canvas id="particles"></canvas>
+<canvas id="network"></canvas>
+<div class="overlay"></div>
 
 <header>
     <h1>Przemek Jedruch</h1>
     <nav>
         <a href="#about">About</a>
         <a href="#projects">Projects</a>
+        <a href="#skills">Skills</a>
         <a href="#contact">Contact</a>
     </nav>
 </header>
 
 <section class="hero">
-    <div class="hero-text">
-        <h2>Predictive Analytics & Machine Learning</h2>
+    <div class="hero-content">
+        <div class="badge">Data Science & Machine Learning</div>
+
+        <h2>Predictive Analytics <span>&</span><br>Machine Learning</h2>
 
         <p>
-            Data Science and Machine Learning enthusiast focused on predictive modeling,
-            financial markets, cryptocurrency analytics, forecasting systems,
-            and AI-driven decision making.
+            I build predictive models and data-driven systems focused on forecasting,
+            financial analytics, cryptocurrency research, and AI-driven decision making.
         </p>
 
         <p>
-            Passionate about building models that transform complex data into actionable insights
-            across finance, technology, and real-world business problems.
+            My goal is to transform complex data into clear insights, structured systems,
+            and practical tools for real-world problems.
         </p>
 
-        <a class="btn" href="#projects">View Projects</a>
-        <a class="btn" href="https://github.com/PrzemekJedruch" target="_blank">GitHub</a>
+        <div class="buttons">
+            <a class="btn" href="#projects">View Projects</a>
+            <a class="btn secondary" href="https://github.com/PrzemekJedruch" target="_blank">GitHub</a>
+        </div>
     </div>
 </section>
 
 <section id="about">
     <h2 class="section-title">About Me</h2>
 
-    <p class="about-text">
-        I am passionate about Machine Learning, predictive analytics, algorithmic thinking,
-        and financial data modeling. My interests include stock market prediction systems,
-        cryptocurrency analysis, forecasting models, and building intelligent solutions
-        using data-driven approaches.
+    <p class="section-subtitle">
+        I am a Machine Learning and Data Science enthusiast focused on predictive modeling,
+        algorithmic thinking, financial markets, automation, and creative AI systems.
     </p>
 
     <div class="cards">
         <div class="card">
+            <div class="icon">🧠</div>
             <h3>Machine Learning</h3>
-            <p>Predictive modeling, Random Forest, regression, forecasting, and explainable AI.</p>
+            <p>Regression, Random Forest, forecasting, SHAP explainability, and model evaluation.</p>
         </div>
 
         <div class="card">
+            <div class="icon">📈</div>
             <h3>Financial Analytics</h3>
-            <p>Interest in stock market models, crypto analytics, trading signals, and market forecasting.</p>
+            <p>Interest in stock market models, crypto analytics, trading systems, and quantitative research.</p>
         </div>
 
         <div class="card">
-            <h3>Data Science</h3>
-            <p>Data cleaning, visualization, feature engineering, model evaluation, and insight generation.</p>
+            <div class="icon">⚙️</div>
+            <h3>Automation & Systems</h3>
+            <p>Building structured workflows, dashboards, and tools that improve decision-making.</p>
         </div>
 
         <div class="card">
-            <h3>Technologies</h3>
-            <p>Python, Pandas, NumPy, Scikit-learn, SHAP, Matplotlib, Seaborn, Git, SQL.</p>
+            <div class="icon">🎨</div>
+            <h3>Creative Technology</h3>
+            <p>Developing EXON 5, a cyberpunk AI-inspired universe combining art, narrative, and technology.</p>
         </div>
     </div>
 </section>
@@ -221,40 +342,67 @@ footer {
 <section id="projects">
     <h2 class="section-title">Featured Project</h2>
 
-    <div class="project">
+    <div class="project-card">
         <h3>Electricity Access Prediction</h3>
 
         <p>
-            Machine Learning project focused on predicting global electricity access levels
+            A Machine Learning project focused on predicting global electricity access levels
             using socioeconomic and technological indicators.
         </p>
 
-        <ul>
-            <li>Data cleaning and preprocessing</li>
-            <li>Correlation-based feature selection</li>
-            <li>Random Forest regression</li>
-            <li>Hyperparameter tuning</li>
-            <li>SHAP explainability</li>
-            <li>Future forecasting</li>
-        </ul>
+        <p>
+            The workflow includes data cleaning, feature selection, Random Forest regression,
+            hyperparameter tuning, SHAP explainability, model evaluation, and future forecasting.
+        </p>
+
+        <div class="tags">
+            <span class="tag">Python</span>
+            <span class="tag">Pandas</span>
+            <span class="tag">Scikit-learn</span>
+            <span class="tag">Random Forest</span>
+            <span class="tag">SHAP</span>
+            <span class="tag">Forecasting</span>
+        </div>
+
+        <div class="metrics">
+            <div class="metric">
+                <strong>0.86</strong>
+                <p>Test R² Score</p>
+            </div>
+            <div class="metric">
+                <strong>5.80</strong>
+                <p>Test MAE</p>
+            </div>
+            <div class="metric">
+                <strong>10.63</strong>
+                <p>Test RMSE</p>
+            </div>
+        </div>
+
+        <br>
 
         <a class="btn" href="https://github.com/PrzemekJedruch/electricity-access-prediction" target="_blank">
-            View Project
+            View Project on GitHub
         </a>
     </div>
+</section>
+
+<section id="skills">
+    <h2 class="section-title">Tech Stack</h2>
+
+    <p class="section-subtitle">
+        Python, Pandas, NumPy, Scikit-learn, SHAP, Matplotlib, Seaborn,
+        Plotly, SQL, Git, GitHub, Linux.
+    </p>
 </section>
 
 <section id="contact">
     <h2 class="section-title">Contact</h2>
 
-    <div class="project">
+    <div class="contact-card">
         <p>Email: przemekjedruch@gmail.com</p>
-        <p>
-            GitHub:
-            <a style="color:#4da3ff;" href="https://github.com/PrzemekJedruch" target="_blank">
-                github.com/PrzemekJedruch
-            </a>
-        </p>
+        <p>GitHub: <a href="https://github.com/PrzemekJedruch" target="_blank">github.com/PrzemekJedruch</a></p>
+        <p>Portfolio: <a href="https://przemekjedruch.github.io">przemekjedruch.github.io</a></p>
     </div>
 </section>
 
@@ -263,48 +411,108 @@ footer {
 </footer>
 
 <script>
-const canvas = document.getElementById("particles");
+const canvas = document.getElementById("network");
 const ctx = canvas.getContext("2d");
 
-canvas.width = window.innerWidth;
-canvas.height = window.innerHeight;
+let width;
+let height;
+let nodes = [];
 
-let particles = [];
+function resizeCanvas() {
+    width = canvas.width = window.innerWidth;
+    height = canvas.height = window.innerHeight;
+}
 
-for (let i = 0; i < 120; i++) {
-    particles.push({
-        x: Math.random() * canvas.width,
-        y: Math.random() * canvas.height,
-        radius: Math.random() * 2,
-        dx: (Math.random() - 0.5) * 0.7,
-        dy: (Math.random() - 0.5) * 0.7
-    });
+function createNodes() {
+    nodes = [];
+    const count = Math.floor((window.innerWidth * window.innerHeight) / 12000);
+
+    for (let i = 0; i < count; i++) {
+        nodes.push({
+            x: Math.random() * width,
+            y: Math.random() * height,
+            vx: (Math.random() - 0.5) * 0.45,
+            vy: (Math.random() - 0.5) * 0.45,
+            r: Math.random() * 2 + 1
+        });
+    }
+}
+
+function drawBrainCluster() {
+    const centerX = width * 0.68;
+    const centerY = height * 0.32;
+
+    ctx.save();
+    ctx.strokeStyle = "rgba(53,167,255,0.22)";
+    ctx.lineWidth = 1;
+
+    for (let i = 0; i < 90; i++) {
+        const angle = Math.random() * Math.PI * 2;
+        const radiusX = 170 + Math.random() * 90;
+        const radiusY = 80 + Math.random() * 60;
+
+        const x1 = centerX + Math.cos(angle) * radiusX;
+        const y1 = centerY + Math.sin(angle) * radiusY;
+
+        const angle2 = Math.random() * Math.PI * 2;
+        const x2 = centerX + Math.cos(angle2) * radiusX;
+        const y2 = centerY + Math.sin(angle2) * radiusY;
+
+        ctx.beginPath();
+        ctx.moveTo(x1, y1);
+        ctx.lineTo(x2, y2);
+        ctx.stroke();
+    }
+
+    ctx.restore();
 }
 
 function animate() {
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    ctx.clearRect(0, 0, width, height);
 
-    particles.forEach(p => {
+    drawBrainCluster();
+
+    for (let i = 0; i < nodes.length; i++) {
+        const n = nodes[i];
+
+        n.x += n.vx;
+        n.y += n.vy;
+
+        if (n.x < 0 || n.x > width) n.vx *= -1;
+        if (n.y < 0 || n.y > height) n.vy *= -1;
+
         ctx.beginPath();
-        ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
-        ctx.fillStyle = "#4da3ff";
+        ctx.arc(n.x, n.y, n.r, 0, Math.PI * 2);
+        ctx.fillStyle = "rgba(53,167,255,0.85)";
         ctx.fill();
 
-        p.x += p.dx;
-        p.y += p.dy;
+        for (let j = i + 1; j < nodes.length; j++) {
+            const n2 = nodes[j];
+            const dx = n.x - n2.x;
+            const dy = n.y - n2.y;
+            const dist = Math.sqrt(dx * dx + dy * dy);
 
-        if (p.x < 0 || p.x > canvas.width) p.dx *= -1;
-        if (p.y < 0 || p.y > canvas.height) p.dy *= -1;
-    });
+            if (dist < 135) {
+                ctx.beginPath();
+                ctx.moveTo(n.x, n.y);
+                ctx.lineTo(n2.x, n2.y);
+                ctx.strokeStyle = `rgba(53,167,255,${1 - dist / 135})`;
+                ctx.lineWidth = 0.5;
+                ctx.stroke();
+            }
+        }
+    }
 
     requestAnimationFrame(animate);
 }
 
+resizeCanvas();
+createNodes();
 animate();
 
 window.addEventListener("resize", () => {
-    canvas.width = window.innerWidth;
-    canvas.height = window.innerHeight;
+    resizeCanvas();
+    createNodes();
 });
 </script>
 
