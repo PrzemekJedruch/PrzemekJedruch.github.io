@@ -1,122 +1,154 @@
 ---
 layout: post
-title: "Can Artificial Intelligence Predict Access to Electricity?"
-date: 2025-06-15
+title: "Lighting the Way: What Machine Learning Reveals About Global Electricity Access"
+date: 2026-07-21
+author: Przemysław Jędruch
+categories: [data-science, machine-learning]
+tags: [electricity-access, world-bank, random-forest, shap]
 ---
 
-# Can Artificial Intelligence Predict Access to Electricity?
+Electricity is more than an infrastructure service. It supports education, healthcare, communication, business activity, and everyday quality of life. Yet access remains uneven across countries.
 
-When people think about artificial intelligence, they often imagine robots, chatbots, or futuristic technologies. But AI can also be used to better understand real-world global problems — including access to electricity.
+This project uses World Bank development indicators from 2007–2016 to investigate which socioeconomic and technological factors are most closely associated with electricity access, how accurately access can be predicted, and how a model can be used to explore possible future scenarios.
 
-I recently worked on a project exploring whether a computer model could predict how much access different countries have to electricity based on factors like internet usage, education, urbanization, and technology development.
+![Development indicators correlated with electricity access]({{ '/assets/images/correlation-with-target.png' | relative_url }})
 
-At first glance, it sounds like a simple question. But the deeper I went into the data, the more interesting patterns started to appear.
+*The strongest correlations with electricity access were observed for internet usage, secondary school enrollment, mobile subscriptions, and urban population.*
 
----
+## The business problem
 
-## Electricity Is More Than Just Power
+Policymakers and development organizations need to understand where limited electricity access is likely to persist and which broader development conditions tend to accompany improvement.
 
-Electricity access is one of the clearest indicators of development in modern societies.
+The analysis therefore addresses three practical business questions:
 
-When a country has stable electricity infrastructure, it usually affects almost every part of life:
+1. **Which factors are most strongly associated with electricity access across countries?**
+2. **How accurately can electricity access be predicted using socioeconomic and technological indicators?**
+3. **How might electricity access change under a simple future-development scenario?**
 
-* education,
-* healthcare,
-* communication,
-* business,
-* transportation,
-* and access to technology.
+The corresponding solutions combine exploratory analysis, a Random Forest regression model, feature importance, SHAP interpretation, and scenario-based prediction.
 
-Countries with limited electricity access often face challenges far beyond energy itself.
+## Question 1: Which factors matter most?
 
-That made me curious:
+### Solution
 
-> Could a machine learning model recognize hidden relationships between social development and electricity access?
+I first calculated correlations between each numeric indicator and electricity access. The strongest positive relationships were:
 
----
+- **Internet usage:** 0.67
+- **Secondary school enrollment:** 0.64
+- **Mobile cellular subscriptions:** 0.63
+- **Urban population:** 0.62
 
-## Teaching a Computer to Recognize Patterns
+These results indicate that countries with stronger digital connectivity, educational participation, and urban development also tend to have higher electricity access.
 
-The project was built using global development data from multiple countries.
+Correlation alone does not show causation, so I also examined feature importance from the Random Forest model.
 
-Instead of manually comparing charts and tables, I used machine learning to analyze patterns automatically.
+![Random Forest feature importance]({{ '/assets/images/feature-importance.png' | relative_url }})
 
-The model looked at information such as:
+Internet usage contributed the largest share of the model's predictive importance. Urban population, secondary school enrollment, and mobile subscriptions were also influential.
 
-* how many people use the internet,
-* levels of education,
-* mobile phone usage,
-* urban population growth,
-* and other development indicators.
+SHAP analysis provided an additional consistency check by showing how feature values affected individual predictions.
 
-Over time, the system began to identify which factors were most strongly connected to electricity access.
+![SHAP summary plot]({{ '/assets/images/shap-summary.png' | relative_url }})
 
-What surprised me most was how strongly technology adoption and education were linked with infrastructure development.
+### What this means for stakeholders
 
-Countries with higher internet usage and stronger educational systems were often also the countries with better electricity access.
+Electricity access should not be treated as an isolated engineering problem. The findings suggest that energy expansion is closely connected with digital inclusion, education, and urban development.
 
----
+For policymakers and development organizations, this supports a coordinated approach: energy infrastructure programs may be more effective when considered alongside investments in schools, communications, and local economic development.
 
-## What the Model Revealed
+These relationships are statistical associations, not proof that increasing one indicator will directly cause electricity access to rise.
 
-One of the most interesting parts of the project was seeing that development indicators are deeply connected.
+## Question 2: Can electricity access be predicted accurately?
 
-Access to electricity was not isolated from the rest of society.
+### Solution
 
-Instead, it appeared as part of a larger ecosystem:
+A Random Forest regression model was trained using internet usage, secondary school enrollment, mobile subscriptions, and urban population.
 
-* technology,
-* education,
-* communication,
-* and urban growth
+On the validation dataset, the model achieved:
 
-all seemed to move together.
+| Metric | Result | Practical interpretation |
+|---|---:|---|
+| R² | **0.88** | The model explained about 88% of the observed variation in electricity access. |
+| Mean Absolute Error | **5.63 percentage points** | A typical prediction differed from the observed value by about 5.63 points. |
 
-The model became surprisingly accurate at recognizing these relationships.
+![Actual versus predicted electricity access]({{ '/assets/images/actual-vs-predicted.png' | relative_url }})
 
-But beyond prediction accuracy, the project became more interesting as a way of understanding global development patterns.
+Most predictions followed the ideal prediction line reasonably closely, although larger errors remained for some observations.
 
----
+### What this means for stakeholders
 
-## Looking Into the Future
+The model is accurate enough to support **screening, prioritization, and exploratory planning**. For example, an organization could use it to identify countries whose predicted electricity access appears unusually low relative to their broader development indicators.
 
-After training the model, I experimented with future scenarios.
+It should not replace official measurement or local field data. A five-to-six percentage point error can still be important when programs, budgets, or vulnerable populations are being evaluated.
 
-What happens if internet access increases in a country?
-What if education improves over time?
-Would the model predict higher electricity access in the future?
+## Question 3: How might access change in a future scenario?
 
-Using simulated future data, the system generated forecasts showing how countries could potentially evolve under different development conditions.
+### Solution
 
-Even though these predictions are only estimates, they demonstrate how AI can help explore future possibilities rather than simply analyze the past.
+To demonstrate a possible planning use case, I created a five-year scenario for India following the final year of the dataset.
 
----
+The values of selected predictors were gradually increased, and the trained model was used to estimate electricity access under those assumptions.
 
-## Why Projects Like This Matter
+![Scenario-based electricity access estimates for India]({{ '/assets/images/india-forecast.png' | relative_url }})
 
-For me, this project was not only about coding or machine learning.
+The estimated values increased from approximately **86.3% in 2017** to **96.8% in 2021**.
 
-It was about learning how data can reveal connections that are difficult to notice manually.
+### What this means for stakeholders
 
-Artificial intelligence is often described as something abstract or futuristic, but in reality it can become a practical tool for understanding:
+The scenario shows how a predictive model can support discussions about possible development paths. It can help stakeholders test questions such as:
 
-* economies,
-* infrastructure,
-* societies,
-* and human behavior.
+> What level of electricity access would the model expect if digital connectivity, education, mobile access, and urbanization continued to improve?
 
-Projects like this also show how data science can combine technology with real-world questions that affect millions of people.
+This is **not a formal time-series forecast** and should not be interpreted as a verified historical estimate or a current prediction. It is an illustrative scenario based on simplified assumptions and patterns learned from the 2007–2016 data.
 
----
+## How the analysis was built
 
-## Final Thoughts
+The project followed the CRISP-DM process:
 
-One thing I enjoy most about machine learning is that it turns raw information into something meaningful.
+1. **Business understanding:** define decision-oriented questions.
+2. **Data understanding:** inspect World Bank country-level indicators.
+3. **Data preparation:** reshape the data into country-year observations and handle missing numeric values with median imputation.
+4. **Modeling:** train and tune a Random Forest regressor.
+5. **Evaluation:** assess R², Mean Absolute Error, prediction plots, feature importance, and SHAP values.
+6. **Communication:** translate results into stakeholder implications and limitations.
 
-Behind every dataset there are real systems, real people, and real-world consequences.
+## Recommendations
 
-This project was an opportunity to explore how technology, education, and infrastructure are connected — and how artificial intelligence can help us better understand those relationships.
+### For policymakers
 
-And honestly, this is only the beginning.
+Coordinate electricity expansion with education, digital connectivity, and urban-development initiatives rather than treating these areas as unrelated programs.
 
-The more I work with predictive systems and AI models, the more I realize how powerful these tools can become in fields like finance, forecasting, automation, and global analytics.
+### For development organizations
+
+Use predictive models as an early-warning or prioritization tool, then validate model signals with recent local data before allocating resources.
+
+### For analysts
+
+Update the dataset with newer years, examine regional models, test alternative missing-data strategies, and evaluate performance separately for low-access and high-access countries.
+
+## Limitations
+
+The analysis has several important limitations:
+
+- The data covers **2007–2016**, so it does not represent current conditions.
+- Missing numeric values were filled using median imputation, which simplifies differences between countries.
+- Statistical relationships do not establish causation.
+- Country-level data can hide major regional and local inequalities.
+- The India projection is scenario-based rather than a formal time-series forecast.
+- Policy changes, conflict, economic shocks, and major infrastructure investments are not explicitly modeled.
+
+## Conclusion
+
+The analysis shows that electricity access is strongly connected with broader development patterns. Internet usage, secondary education, mobile connectivity, and urbanization consistently appeared as the most informative predictors.
+
+The Random Forest model achieved strong validation performance, demonstrating that machine learning can provide useful estimates and decision-support signals. Its greatest value is not in replacing official statistics, but in helping stakeholders identify patterns, compare scenarios, and decide where deeper investigation may be needed.
+
+## Project files and acknowledgements
+
+The complete analysis is available in the project notebook and repository documentation:
+
+- [Project notebook]({{ '/Project.ipynb' | relative_url }})
+- [Project README]({{ '/README.md' | relative_url }})
+- [Python requirements]({{ '/requirements.txt' | relative_url }})
+
+Data was obtained from the World Bank World Development Indicators. This independent educational project was completed as part of the Udacity Data Scientist Nanodegree project framework.
